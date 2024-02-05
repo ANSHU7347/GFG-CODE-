@@ -1,0 +1,67 @@
+class Solution
+{
+    public:
+    Node *sortedInsert(Node* head, int data)
+    {
+    
+       //Your code here
+       //if ll is empty
+       if(head==NULL){
+           Node * ptr= new Node(data);
+           ptr->next=ptr;
+           return ptr;
+       }
+       Node *ptr=head;
+       Node* prev=head;
+       // if ll have single element
+       if(ptr->next==head){
+           if(ptr->data>=data){
+               Node* p=new Node(data);
+               p->next=ptr;
+               ptr->next=p;
+               return p;
+           }
+           else {
+               Node* p=new Node(data);
+               ptr->next=p;
+               p->next=ptr;
+               return ptr;
+           }
+       }
+       ptr=head;
+       while(prev->next!=head)prev=prev->next;
+       Node* last=prev;
+       prev=head;
+       int cnt=0;
+       while(true){
+           //insert from begging
+           if(cnt==0 && ptr->data>=data){
+               Node *p=new Node(data);
+               p->next=ptr;
+               last->next=p;
+               return p;
+           }
+           //insert from mid
+           if(ptr->data>=data){
+               Node* p=new Node(data);
+               prev->next=p;
+               p->next=ptr;
+               return head;
+           }
+           //insert from end;
+           if(ptr->next==head){
+               Node* p=new Node(data);
+               ptr->next=p;
+               p->next=head;
+               return head;
+           }
+           
+           
+           
+           
+        cnt++;
+        prev=ptr;
+        ptr=ptr->next;
+       }
+    }
+};
