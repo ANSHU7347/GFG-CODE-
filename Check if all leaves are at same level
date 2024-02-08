@@ -1,0 +1,22 @@
+class Solution{
+  public:
+    unordered_set<int> set;
+    
+    void findEqualLevels(Node *root, int level) {
+        if(!root) return;
+        if(root->left == NULL && root->right == NULL) {
+            set.insert(level);
+        }
+        
+        findEqualLevels(root->left, level+1);
+        findEqualLevels(root->right, level+1);
+    }
+    
+    bool check(Node *root)
+    {
+// Your code here
+findEqualLevels(root, 0);
+if(set.size() == 1) return true;
+else return false;
+    }
+};
